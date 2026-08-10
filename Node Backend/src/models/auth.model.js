@@ -25,7 +25,8 @@ const instagramUserSchema = new mongoose.Schema({
   pageId: String,
   pageName: String,
   lastLogin: { type: Date, default: Date.now },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  webhookAccountId: {type: String,default: null,},
 });
 
 module.exports = mongoose.model('InstagramUser', instagramUserSchema);

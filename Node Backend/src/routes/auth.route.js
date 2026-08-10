@@ -67,20 +67,24 @@ router.get('/callback', async (req, res) => {
       `https://graph.instagram.com/v23.0/me`,
       {
         params: {
-          fields: "id,username,account_type",
+          fields: "id,username,account_type,user_id",
           access_token: accessToken,
         },
       }
     );
 
+
     const profile = profileResponse.data;
+    const webhookAccountId = profile.user_id;
 
     const instagramUser = await InstagramUser.findOneAndUpdate(
       { instagramId: profile.id },
       {
         instagramId: profile.id,
         username: profile.username,
+        accountType: profile.account_type,
         accessToken,
+        webhookAccountId: profile.user_id,
       },
       {
         upsert: true,
@@ -118,6 +122,34 @@ router.get('/verify', (req, res) => {
       'noInvalid! Get your Facebook App ID from https://developers.facebook.com/apps/',
     note: 'This should be your FACEBOOK APP ID (all numbers), not an Instagram App ID'
   });
+});
+
+router.post("/subscribe", async (req, res) => {
+  try {
+    const { accessToken } = req.body;
+
+    const response = await axios.post(
+      "https://graph.instagram.com/v23.0/me/subscribed_apps",
+      null,
+      {
+        params: {
+          access_token: accessToken,
+        },
+      }
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: response.data,
+    });
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+
+    return res.status(500).json({
+      success: false,
+      error: err.response?.data || err.message,
+    });
+  }
 });
 
 module.exports = router;
