@@ -10,6 +10,10 @@ const activitySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  instagramUserName: {
+    type: String,
+    default: null,
+  },
   commentId: {
     type: String,
     required: true

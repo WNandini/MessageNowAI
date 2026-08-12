@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { Lock, ArrowRight, User } from 'lucide-react';
 
 export default function LoginPage() {
+  const handleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
+  }
+
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-main)] flex flex-col justify-between px-6 py-6 selection:bg-pink-500 selection:text-white overflow-x-hidden">
       
@@ -68,7 +72,7 @@ export default function LoginPage() {
           </div>
 
           {/* Continue Button */}
-          <button className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity text-white font-semibold py-4 rounded-xl shadow-lg shadow-pink-500/20 cursor-pointer">
+          <button onClick={handleLogin} className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity text-white font-semibold py-4 rounded-xl shadow-lg shadow-pink-500/20 cursor-pointer">
             <span>Continue with Instagram</span>
             <ArrowRight className="w-4 h-4" />
           </button>

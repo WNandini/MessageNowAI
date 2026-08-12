@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { createAutomation, getAutomations } = require("../controllers/automation.controller");
+const authMiddleware = require("../middleware/authMiddleware");
 
 /**
  * @swagger
@@ -40,7 +41,7 @@ const { createAutomation, getAutomations } = require("../controllers/automation.
  *       500:
  *         description: Server error
  */
-router.post("/", createAutomation);
-router.get("/", getAutomations);
+router.post("/", authMiddleware, createAutomation);
+router.get("/", authMiddleware, getAutomations);
 
 module.exports = router;

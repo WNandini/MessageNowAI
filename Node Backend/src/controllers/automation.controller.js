@@ -2,19 +2,22 @@ const automationService = require("../services/automation.service");
 
 const createAutomation = async (req, res) => {
   try {
-    const { keyword, message, isActive } = req.body;
+    const { instagramPostId,  keyword, message, isActive, attachment } = req.body;
 
-    if (!keyword || !message) {
+    if (!instagramPostId || !keyword || !message) {
       return res.status(400).json({
         success: false,
-        message: "keyword and message are required."
+        message: "instagramPostId, keyword and message are required."
       });
     }
 
     const automation = await automationService.createAutomation({
+      instagramUserId: req.userId,
+      instagramPostId,
       keyword,
       message,
-      isActive
+      isActive,
+      attachment
     });
 
     return res.status(201).json({
@@ -32,7 +35,10 @@ const createAutomation = async (req, res) => {
 
 const getAutomations = async (req, res) => {
   try {
-    const automations = await automationService.getAllAutomations();
+    const automations = await automationService.getAllAutomations(
+      req.userId
+    );
+
     return res.status(200).json({
       success: true,
       data: automations

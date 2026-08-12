@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from '@/app/components/Sidebar';
+import AuthGuard from "@/app/components/AuthGuard";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,7 +10,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       
       {/* Main content area where child pages are injected */}
       <main className="flex-1 md:pl-72 flex flex-col min-w-0">
-        {children}
+        <AuthGuard>
+          {children}
+        </AuthGuard>
       </main>
     </div>
   );

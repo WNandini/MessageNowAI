@@ -3,6 +3,78 @@ const instagramService = require("./instagram.service");
 const activityService = require("./activity.service");
 const InstagramUser = require("../models/instagramUser.model");
 
+// const processWebhookEvent = async (body) => {
+//   try {
+//     const entry = body.entry?.[0];
+//     const change = entry?.changes?.[0];
+//     const value = change?.value;
+
+//     if (!value || change.field !== "comments") {
+//       return;
+//     }
+
+//     // Instagram Business Account ID receiving the comment
+//     const instagramBusinessAccountId = entry.id;
+//     const commentId = value.id;
+//     const instagramUserId = value.from?.id;
+//     const commentText = value.text;
+
+//     // Find the Instagram account that owns the automation
+//     const instagramAccount = await InstagramUser.findOne({
+//       webhookAccountId: instagramBusinessAccountId,
+//     });
+
+//     if (!instagramAccount || !instagramAccount.accessToken) {
+//       return;
+//     }
+
+//     // Match keyword
+//     const matchedAutomation =
+//       await automationService.findAutomationByKeyword(commentText);
+
+//     if (!matchedAutomation) {
+//       return;
+//     }
+
+//     matchedAutomation.commentsReceived += 1;
+//     await matchedAutomation.save();
+
+//     const dmResult = await instagramService.sendDirectMessage(
+//       commentId,
+//       matchedAutomation.message,
+//       instagramAccount.accessToken,
+//       matchedAutomation.attachment
+//     );
+
+//     if (dmResult.success) {
+//       await activityService.createLog({
+//         automationId: matchedAutomation._id,
+//         instagramUserId,
+//         commentId,
+//         commentText,
+//         keyword: matchedAutomation.keyword,
+//         messageSent: matchedAutomation.message,
+//         status: "SUCCESS",
+//         error: null,
+//       });
+//     } else {
+//       await activityService.createLog({
+//         automationId: matchedAutomation._id,
+//         instagramUserId,
+//         commentId,
+//         commentText,
+//         keyword: matchedAutomation.keyword,
+//         messageSent: matchedAutomation.message,
+//         status: "FAILED",
+//         error: dmResult.error,
+//       });
+//     }
+//   } catch (error) {
+//     console.error("Error processing webhook payload:", error);
+//   }
+// };
+
+
 const processWebhookEvent = async (body) => {
   try {
     const entry = body.entry?.[0];
@@ -18,7 +90,7 @@ const processWebhookEvent = async (body) => {
     const commentId = value.id;
     const instagramUserId = value.from?.id;
     const commentText = value.text;
-
+    const instagramUserName = value.from?.username;
     // Find the Instagram account that owns the automation
     const instagramAccount = await InstagramUser.findOne({
       webhookAccountId: instagramBusinessAccountId,
@@ -32,20 +104,33 @@ const processWebhookEvent = async (body) => {
     const matchedAutomation =
       await automationService.findAutomationByKeyword(commentText);
 
+      
     if (!matchedAutomation) {
       return;
     }
 
+    matchedAutomation.commentsReceived = (matchedAutomation.commentsReceived || 0) + 1;
+    await matchedAutomation.save();
+
+    // Send DM
     const dmResult = await instagramService.sendDirectMessage(
       commentId,
       matchedAutomation.message,
-      instagramAccount.accessToken
+      instagramAccount.accessToken,
+      matchedAutomation.attachment
     );
 
     if (dmResult.success) {
+      // Increment DMs sent
+      // matchedAutomation.dmsSent += 1;
+      matchedAutomation.dmsSent = (matchedAutomation.dmsSent || 0) + 1;
+
+      await matchedAutomation.save();
+
       await activityService.createLog({
         automationId: matchedAutomation._id,
         instagramUserId,
+        instagramUserName,
         commentId,
         commentText,
         keyword: matchedAutomation.keyword,
@@ -65,9 +150,11 @@ const processWebhookEvent = async (body) => {
         error: dmResult.error,
       });
     }
-
   } catch (error) {
-    console.error("Error processing webhook payload:", error);
+    console.error(
+      "Error processing webhook payload:",
+      error
+    );
   }
 };
 

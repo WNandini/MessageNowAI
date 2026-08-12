@@ -19,7 +19,14 @@ const getLogs = async () => {
   }
 };
 
+// const getActivities = async () => {
+//   return await Activity.find()
+//     .sort({ createdAt: -1 })
+//     .limit(10);
+// };
+
 module.exports = {
   createLog,
-  getLogs
+  getLogs,
+  // getActivities
 };
