@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: "https://scandal-multitude-antics.ngrok-free.dev",
+        url: "https://messagenowai.onrender.com",
       },
     ],
   },
