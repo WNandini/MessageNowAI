@@ -6,7 +6,8 @@ import { Lock, ArrowRight, User } from 'lucide-react';
 
 export default function LoginPage() {
   const handleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
+    window.location.href = 'https://messagenowai.onrender.com/auth/login'
+    // window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
   }
 
   return (
