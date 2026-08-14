@@ -9,6 +9,7 @@ export default function LoginPage() {
   const handleLogin = () => {
     console.log('processENv',process.env.NEXT_PUBLIC_API_URL)
     console.log('https://messagenowai.onrender.com/auth/login')
+    console.log("console.log added")
     window.location.href = 'https://messagenowai.onrender.com/auth/login'
     // window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
   }
