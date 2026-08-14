@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { Lock, ArrowRight, User } from 'lucide-react';
 
 export default function LoginPage() {
+
   const handleLogin = () => {
+    console.log('processENv',process.env.NEXT_PUBLIC_API_URL)
+    console.log('https://messagenowai.onrender.com/auth/login')
     window.location.href = 'https://messagenowai.onrender.com/auth/login'
     // window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
   }
@@ -74,7 +77,7 @@ export default function LoginPage() {
 
           {/* Continue Button */}
           <button onClick={handleLogin} className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity text-white font-semibold py-4 rounded-xl shadow-lg shadow-pink-500/20 cursor-pointer">
-            <span>Continue with Instagram</span>
+            <span>Continue with Instagram------------------</span>
             <ArrowRight className="w-4 h-4" />
           </button>
 
