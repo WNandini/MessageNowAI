@@ -96,7 +96,6 @@ router.get('/callback', async (req, res) => {
 
     const jwt = require("jsonwebtoken");
 
-    console.log("JWT", process.env.JWT_SECRET)
     const token = jwt.sign(
       {
         userId: instagramUser._id,
