@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-   "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "eslint",
-  "cf:build": "opennextjs-cloudflare build",
-  "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+    "build": "next build",
+    "deploy:dev": "npm run build && wrangler deploy --env dev",
+    "deploy:prod": "npm run build && wrangler deploy --env production",
+    "dev": "wrangler dev --env dev --port 8771"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
@@ -24,8 +22,8 @@
     "@opennextjs/cloudflare": "^1.20.2",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.5.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
