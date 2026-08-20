@@ -9,7 +9,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-main)] flex flex-col justify-between selection:bg-pink-500 selection:text-white overflow-x-hidden">
-      
+
       {/* Top Navigation Bar */}
       <header className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
         <div className="flex items-center space-x-8">
@@ -20,18 +20,18 @@ export default function LandingPage() {
             Built for Instagram creators
           </span>
         </div>
-        <Link 
-  href="/auth"
-  className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium px-4 py-2 rounded-full border border-white/10"
->
-  <span>Get Started</span>
-  <ArrowRight className="w-4 h-4" />
-</Link>
+        <Link
+          href="/auth"
+          className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium px-4 py-2 rounded-full border border-white/10"
+        >
+          <span>Get Started</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </header>
 
       {/* Hero Section */}
       <main className="w-full max-w-7xl mx-auto px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center flex-grow">
-        
+
         {/* Left Column: Copy & Call-to-Action */}
         <div className="lg:col-span-7 flex flex-col items-start space-y-6">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none">
@@ -40,19 +40,21 @@ export default function LandingPage() {
               Into DMs.
             </span>
           </h1>
-          
+
           <p className="text-lg sm:text-xl text-[var(--text-muted)] max-w-xl font-normal leading-relaxed">
             Automatically send the right message when someone comments on your Instagram post.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 pt-2">
-            <button className="flex items-center space-x-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-90 transition-opacity text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-pink-500/20">
-              {/* <Instagram className="w-5 h-5" /> */}
+            <Link
+              href="/auth"
+              className="flex items-center space-x-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-90 transition-opacity text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-pink-500/20 inline-flex"
+            >
               <span>Get Started with Instagram</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
-          
+
           <span className="text-xs text-[var(--text-muted)] tracking-wide">
             Connect your Instagram account in seconds.
           </span>
@@ -61,7 +63,7 @@ export default function LandingPage() {
         {/* Right Column: Interactive UI Visualizer Simulation Card */}
         <div className="lg:col-span-5 w-full flex justify-center">
           <div className="w-full max-w-md bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl p-6 shadow-2xl relative flex flex-col space-y-6">
-            
+
             {/* Top Post / Comment Box */}
             <div className="bg-[var(--bg-card-inner)] border border-[var(--border-color)] rounded-2xl p-4 flex flex-col space-y-4">
               <div className="flex items-center space-x-3">
@@ -73,7 +75,7 @@ export default function LandingPage() {
               <p className="text-sm text-gray-300">
                 Comment <span className="font-semibold text-white">GUIDE</span> to get the free resource 👇
               </p>
-              
+
               {/* User Reply Element */}
               <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-3 flex items-center justify-between">
                 <div className="flex items-center space-x-2 text-xs text-gray-400">
@@ -98,7 +100,7 @@ export default function LandingPage() {
                 <CheckCircle2 className="w-4 h-4" />
                 <span>AUTOMATIC DM SENT</span>
               </div>
-              
+
               <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-4 flex flex-col space-y-3">
                 <p className="text-sm text-gray-200">
                   Hey! 👋 Here's your free guide:
@@ -118,7 +120,7 @@ export default function LandingPage() {
       <footer className="w-full border-t border-[var(--border-color)] py-8 mt-auto">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center space-y-4">
           <span className="font-bold text-white tracking-tight">MessageNowAI</span>
-          
+
           <div className="flex items-center space-x-4 text-xs text-[var(--text-muted)] font-medium">
             <span>Simple</span>
             <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
@@ -126,7 +128,7 @@ export default function LandingPage() {
             <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
             <span>Built for Instagram</span>
           </div>
-          
+
           <p className="text-xs text-gray-500 pt-2">
             © 2026 MessageNowAI. All rights reserved.
           </p>

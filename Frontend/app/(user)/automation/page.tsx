@@ -7,7 +7,7 @@ import { useGetAutomationsQuery } from "@/app/store/api/automationApi";
 export default function AutomationPage() {
   const { data, isLoading, isError } = useGetAutomationsQuery();
   const automations = data?.data || data || [];
- const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-[#09090b] text-white p-6 md:p-12 flex flex-col space-y-8">
 
@@ -30,21 +30,28 @@ export default function AutomationPage() {
           Your Automations
         </h2>
 
- {/* Loading */}
+        {/* Loading */}
         {isLoading && (
-          <div className="py-16 text-center text-zinc-400">
-            Loading automations...
+          <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+            <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-gray-500 text-sm font-medium">Loading posts...</p>
           </div>
         )}
 
         {/* Error */}
         {isError && (
-          <div className="py-16 text-center text-red-400">
-            Failed to load automations.
+          <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+            <p className="text-red-500 text-sm font-medium">Failed to load posts</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="text-purple-500 hover:underline text-sm"
+            >
+              Try again
+            </button>
           </div>
         )}
 
-          {!isLoading && !isError && automations.length === 0 && (
+        {!isLoading && !isError && automations.length === 0 && (
           <div className="bg-[#121215] border border-zinc-800/80 rounded-2xl p-12 text-center">
             <div className="text-4xl mb-4">
               ⚡
@@ -99,27 +106,24 @@ export default function AutomationPage() {
                   <div className="flex items-center space-x-3">
 
                     <div
-                      className={`flex items-center space-x-1.5 px-3 py-1 rounded-full ${
-                        automation.isActive
-                          ? "bg-emerald-500/10 border border-emerald-500/20"
-                          : "bg-zinc-500/10 border border-zinc-500/20"
-                      }`}
+                      className={`flex items-center space-x-1.5 px-3 py-1 rounded-full ${automation.isActive
+                        ? "bg-emerald-500/10 border border-emerald-500/20"
+                        : "bg-zinc-500/10 border border-zinc-500/20"
+                        }`}
                     >
 
                       <div
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          automation.isActive
-                            ? "bg-emerald-400 animate-pulse"
-                            : "bg-zinc-500"
-                        }`}
+                        className={`w-1.5 h-1.5 rounded-full ${automation.isActive
+                          ? "bg-emerald-400 animate-pulse"
+                          : "bg-zinc-500"
+                          }`}
                       />
 
                       <span
-                        className={`text-[10px] font-bold tracking-wider uppercase ${
-                          automation.isActive
-                            ? "text-emerald-400"
-                            : "text-zinc-500"
-                        }`}
+                        className={`text-[10px] font-bold tracking-wider uppercase ${automation.isActive
+                          ? "text-emerald-400"
+                          : "text-zinc-500"
+                          }`}
                       >
                         {automation.isActive
                           ? "Active"
@@ -175,16 +179,6 @@ export default function AutomationPage() {
                       automation.createdAt
                     ).toLocaleDateString()}
                   </span>
-
-                  <button className="flex items-center space-x-1 text-zinc-300 hover:text-white transition-colors font-medium group cursor-pointer">
-
-                    <span>
-                      Edit Flow
-                    </span>
-
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-
-                  </button>
 
                 </div>
 

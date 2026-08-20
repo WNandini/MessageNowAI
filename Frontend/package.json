@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev:next": "next dev",
     "build": "next build",
     "deploy:dev": "npm run build && wrangler deploy --env dev",
     "deploy:prod": "npm run build && wrangler deploy --env production",

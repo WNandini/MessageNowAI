@@ -14,14 +14,37 @@ export default function PostsPage() {
   const { data: automationsResponse, isLoading: automationsLoading, } = useGetAutomationsQuery();
 
   useEffect(() => {
-      if (window.location.hash) {
-        window.history.replaceState(
-          null,
-          "",
-          window.location.pathname
-        );
-      }
-    }, []);
+    if (window.location.hash) {
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname
+      );
+    }
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+        <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-gray-500 text-sm font-medium">Loading posts...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+        <p className="text-red-500 text-sm font-medium">Failed to load posts</p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="text-purple-500 hover:underline text-sm"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
 
   const automations = automationsResponse?.data || [];
 

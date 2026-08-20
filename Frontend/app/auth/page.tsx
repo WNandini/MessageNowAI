@@ -63,21 +63,21 @@ export default function LoginPage() {
           </div>
 
           {/* Connection Visualizer Box */}
-          <div className="w-full bg-[var(--bg-card-inner)] border border-[var(--border-color)] rounded-2xl p-5 flex flex-col items-center space-y-3">
-            <div className="flex items-center space-x-2 text-xs font-medium text-gray-300">
+          {/* <div className="w-full bg-[var(--bg-card-inner)] border border-[var(--border-color)] rounded-2xl p-5 flex flex-col items-center space-y-3"> */}
+            {/* <div className="flex items-center space-x-2 text-xs font-medium text-gray-300">
               <User className="w-3.5 h-3.5 text-gray-400" />
               <span>@youraccount</span>
-            </div>
-            <div className="w-[1px] h-6 bg-[var(--border-color)]"></div>
+            </div> */}
+            {/* <div className="w-[1px] h-6 bg-[var(--border-color)]"></div> */}
             <div className="flex items-center space-x-2 text-xs font-semibold text-white">
               <span className="w-4 h-4 rounded bg-white text-black flex items-center justify-center text-[10px] font-bold">M</span>
-              <span>MessageNowAI</span>
+              <span>Message Now AI</span>
             </div>
-          </div>
+          {/* </div> */}
 
           {/* Continue Button */}
           <button onClick={handleLogin} className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity text-white font-semibold py-4 rounded-xl shadow-lg shadow-pink-500/20 cursor-pointer">
-            <span>Continue with Instagram------------------</span>
+            <span>Continue with Instagram</span>
             <ArrowRight className="w-4 h-4" />
           </button>
 
